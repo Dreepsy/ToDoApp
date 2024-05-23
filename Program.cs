@@ -28,7 +28,6 @@ public class ToDoList
     private string filepath = @"C:\Users\M02447\coding woche\ToDo.txt";
     private readonly object lockObject = new object();
 
-
     public ToDoList()
     {
         LoadFromToDoFile();
