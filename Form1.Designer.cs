@@ -3,6 +3,12 @@
     partial class Form1
     {
         private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.ListBox listBoxToDo;
+        private System.Windows.Forms.TextBox textBoxDescription;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDueDate;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonChange;
 
         protected override void Dispose(bool disposing)
         {
@@ -28,27 +34,26 @@
             this.listBoxToDo.FormattingEnabled = true;
             this.listBoxToDo.Location = new System.Drawing.Point(12, 12);
             this.listBoxToDo.Name = "listBoxToDo";
-            this.listBoxToDo.Size = new System.Drawing.Size(220, 238);
+            this.listBoxToDo.Size = new System.Drawing.Size(260, 173);
             this.listBoxToDo.TabIndex = 0;
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.Location = new System.Drawing.Point(238, 12);
+            this.textBoxDescription.Location = new System.Drawing.Point(12, 191);
             this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(169, 20);
+            this.textBoxDescription.Size = new System.Drawing.Size(260, 20);
             this.textBoxDescription.TabIndex = 1;
             // 
             // dateTimePickerDueDate
             // 
-            this.dateTimePickerDueDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerDueDate.Location = new System.Drawing.Point(238, 39);
+            this.dateTimePickerDueDate.Location = new System.Drawing.Point(12, 217);
             this.dateTimePickerDueDate.Name = "dateTimePickerDueDate";
-            this.dateTimePickerDueDate.Size = new System.Drawing.Size(169, 20);
+            this.dateTimePickerDueDate.Size = new System.Drawing.Size(260, 20);
             this.dateTimePickerDueDate.TabIndex = 2;
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(238, 78);
+            this.buttonAdd.Location = new System.Drawing.Point(12, 243);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 3;
@@ -58,7 +63,7 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(332, 78);
+            this.buttonDelete.Location = new System.Drawing.Point(104, 243);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 4;
@@ -68,9 +73,9 @@
             // 
             // buttonChange
             // 
-            this.buttonChange.Location = new System.Drawing.Point(238, 122);
+            this.buttonChange.Location = new System.Drawing.Point(197, 243);
             this.buttonChange.Name = "buttonChange";
-            this.buttonChange.Size = new System.Drawing.Size(169, 23);
+            this.buttonChange.Size = new System.Drawing.Size(75, 23);
             this.buttonChange.TabIndex = 5;
             this.buttonChange.Text = "Ändern";
             this.buttonChange.UseVisualStyleBackColor = true;
@@ -78,9 +83,7 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(419, 260);
+            this.ClientSize = new System.Drawing.Size(284, 278);
             this.Controls.Add(this.buttonChange);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
@@ -88,17 +91,10 @@
             this.Controls.Add(this.textBoxDescription);
             this.Controls.Add(this.listBoxToDo);
             this.Name = "Form1";
-            this.Text = "ToDo List";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
-
-        private System.Windows.Forms.ListBox listBoxToDo;
-        private System.Windows.Forms.TextBox textBoxDescription;
-        private System.Windows.Forms.DateTimePicker dateTimePickerDueDate;
-        private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.Button buttonChange;
     }
 }
