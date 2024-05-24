@@ -3,144 +3,133 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
-//define how a to-do looks like
-public class ToDoItem
+namespace ToDoListGUI
 {
-    public string Description {get; set;}
-    public DateTime DueDate {get; set;}
-
-    public ToDoItem(string description, DateTime dueDate)
+    public class ToDoItem
     {
-        Description = description;
-        DueDate = dueDate;
-    }
+        public string Description { get; set; }
+        public DateTime DueDate { get; set; }
 
-    //set formate for date check
-    public override string ToString()
-    {
-        return $"{Description} (Fällig bis: {DueDate:dd.MM.yyyy})";
-    }
-}
-
-    //generate to-do list
-public class ToDoList
-{
-    private List<ToDoItem> todoList = new List<ToDoItem>();
-    private string filepath = @"C:\Users\M02447\coding woche\ToDo.txt";
-    private readonly object lockObject = new object();
-
-    public ToDoList()
-    {
-        LoadFromToDoFile();
-    }
-
-    public List<ToDoItem> GetToDoList()
-    {
-        lock (lockObject)
+        public ToDoItem(string description, DateTime dueDate)
         {
-            return new List<ToDoItem>(todoList);
+            Description = description;
+            DueDate = dueDate;
+        }
+
+        public override string ToString()
+        {
+            return $"{Description} (Fällig bis: {DueDate:dd.MM.yyyy})";
         }
     }
 
-    //add to-do
-    public void AddToDoItem(string description, DateTime dueDate)
+    public class ToDoList
     {
-        lock (lockObject)
-        {
-            todoList.Add(new ToDoItem(description, dueDate));
-        }
-        SaveToToDoFile();
+        private List<ToDoItem> todoList = new List<ToDoItem>();
+        private string filepath = "ToDo.txt";
+        private readonly object lockObject = new object();
 
-        if (description.Equals("Rick Roll", StringComparison.OrdinalIgnoreCase))
+        public ToDoList()
         {
-            PlayRickRollVideo(); //see line 128
+            LoadFromToDoFile();
         }
-    }
 
-    //delete to-do
-    public void DeleteToDoItem(int index)
-    {
-        lock (lockObject)
+        public List<ToDoItem> GetToDoList()
         {
-            todoList.RemoveAt(index);
-        }
-        SaveToToDoFile();
-    }
-
-    //change to-do
-    public void ChangeToDoItem(int index, string newDescription, DateTime newDueDate)
-    {
-        lock (lockObject)
-        {
-            var todo = todoList[index];
-            todo.Description = newDescription;
-            todo.DueDate = newDueDate;
-        }
-        SaveToToDoFile();
-    }
-
-    //write into .txt
-    private void SaveToToDoFile()
-    {
-        lock (lockObject)
-        {
-            try
+            lock (lockObject)
             {
-                var lines = new List<string>();
-                foreach (var item in todoList)
-                {
-                    lines.Add($"{item.Description}|{item.DueDate:dd.MM.yyyy}");
-                }
-                File.WriteAllLines(filepath, lines);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Fehler beim Schreiben der Datei: " + ex.Message);
+                return new List<ToDoItem>(todoList);
             }
         }
-    }
 
-    //read from .txt
-    private void LoadFromToDoFile()
-    {
-        lock (lockObject)
+        public void AddToDoItem(string description, DateTime dueDate)
         {
-            try
+            lock (lockObject)
             {
-                if (File.Exists(filepath))
+                todoList.Add(new ToDoItem(description, dueDate));
+            }
+            SaveToToDoFile();
+        }
+
+        public void DeleteToDoItem(int index)
+        {
+            lock (lockObject)
+            {
+                todoList.RemoveAt(index);
+            }
+            SaveToToDoFile();
+        }
+
+        public void ChangeToDoItem(int index, string newDescription, DateTime newDueDate)
+        {
+            lock (lockObject)
+            {
+                var todo = todoList[index];
+                todo.Description = newDescription;
+                todo.DueDate = newDueDate;
+            }
+            SaveToToDoFile();
+        }
+
+        private void SaveToToDoFile()
+        {
+            lock (lockObject)
+            {
+                try
                 {
-                    var lines = File.ReadAllLines(filepath);
-                    foreach (var line in lines)
+                    var lines = new List<string>();
+                    foreach (var item in todoList)
                     {
-                        var parts = line.Split('|');
-                        if (parts.Length == 2 && DateTime.TryParseExact(parts[1], "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dueDate))
+                        lines.Add($"{item.Description}|{item.DueDate:dd.MM.yyyy}");
+                    }
+                    File.WriteAllLines(filepath, lines);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Fehler beim Schreiben der Datei: " + ex.Message);
+                }
+            }
+        }
+
+        private void LoadFromToDoFile()
+        {
+            lock (lockObject)
+            {
+                try
+                {
+                    if (File.Exists(filepath))
+                    {
+                        var lines = File.ReadAllLines(filepath);
+                        foreach (var line in lines)
                         {
-                            todoList.Add(new ToDoItem(parts[0], dueDate));
+                            var parts = line.Split('|');
+                            if (parts.Length == 2 && DateTime.TryParseExact(parts[1], "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dueDate))
+                            {
+                                todoList.Add(new ToDoItem(parts[0], dueDate));
+                            }
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Fehler beim Laden der Datei: " + ex.Message);
+                }
+            }
+        }
+
+        private void PlayRickRollVideo()
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                    UseShellExecute = true
+                });
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Fehler beim Laden der Datei: " + ex.Message);
+                Console.WriteLine("Fehler beim Abspielen des Videos" + ex);
             }
-        }
-    }
-
-    //easter-egg
-    private void PlayRickRollVideo()
-    {
-        try
-        {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-                UseShellExecute = true
-            });
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Fehler beim Abspielen des Videos" + ex);
         }
     }
 }

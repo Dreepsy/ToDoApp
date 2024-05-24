@@ -6,18 +6,17 @@ namespace ToDoListGUI
 {
     class ToDoProgram
     {
+        [STAThread]
         static void Main(string[] args)
         {
             try
             {
-                Thread guiThread = new Thread(() =>
-                {
-                    Application.EnableVisualStyles();
-                    Application.SetCompatibleTextRenderingDefault(false);
-                    Application.Run(new Form1());
-                });
-                guiThread.Start();
-                guiThread.Join(); // Warten darauf, dass der GUI-Thread beendet wird
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+
+                var settings = new Settings();
+                var form = new Form1(settings);
+                Application.Run(form);
             }
             catch (Exception ex)
             {

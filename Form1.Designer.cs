@@ -3,12 +3,6 @@
     partial class Form1
     {
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.ListBox listBoxToDo;
-        private System.Windows.Forms.TextBox textBoxDescription;
-        private System.Windows.Forms.DateTimePicker dateTimePickerDueDate;
-        private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.Button buttonChange;
 
         protected override void Dispose(bool disposing)
         {
@@ -19,6 +13,8 @@
             base.Dispose(disposing);
         }
 
+        #region Windows Form Designer generated code
+
         private void InitializeComponent()
         {
             this.listBoxToDo = new System.Windows.Forms.ListBox();
@@ -27,6 +23,9 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonChange = new System.Windows.Forms.Button();
+            this.buttonSettings = new System.Windows.Forms.Button(); // Add buttonSettings
+            this.textBoxUsername = new System.Windows.Forms.TextBox();
+            this.textBoxBackgroundImagePath = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // listBoxToDo
@@ -81,9 +80,36 @@
             this.buttonChange.UseVisualStyleBackColor = true;
             this.buttonChange.Click += new System.EventHandler(this.buttonChange_Click);
             // 
+            // buttonSettings
+            // 
+            this.buttonSettings.Location = new System.Drawing.Point(12, 269);
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Size = new System.Drawing.Size(75, 23);
+            this.buttonSettings.TabIndex = 6;
+            this.buttonSettings.Text = "Einstellungen";
+            this.buttonSettings.UseVisualStyleBackColor = true;
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
+            // 
+            // textBoxUsername
+            // 
+            this.textBoxUsername.Location = new System.Drawing.Point(12, 298);
+            this.textBoxUsername.Name = "textBoxUsername";
+            this.textBoxUsername.Size = new System.Drawing.Size(260, 20);
+            this.textBoxUsername.TabIndex = 7;
+            // 
+            // textBoxBackgroundImagePath
+            // 
+            this.textBoxBackgroundImagePath.Location = new System.Drawing.Point(12, 324);
+            this.textBoxBackgroundImagePath.Name = "textBoxBackgroundImagePath";
+            this.textBoxBackgroundImagePath.Size = new System.Drawing.Size(260, 20);
+            this.textBoxBackgroundImagePath.TabIndex = 8;
+            // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(284, 278);
+            this.ClientSize = new System.Drawing.Size(284, 361);
+            this.Controls.Add(this.textBoxBackgroundImagePath);
+            this.Controls.Add(this.textBoxUsername);
+            this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.buttonChange);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
@@ -96,5 +122,17 @@
             this.PerformLayout();
 
         }
+
+        #endregion
+
+        private System.Windows.Forms.ListBox listBoxToDo;
+        private System.Windows.Forms.TextBox textBoxDescription;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDueDate;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonChange;
+        private System.Windows.Forms.Button buttonSettings;
+        private System.Windows.Forms.TextBox textBoxUsername;
+        private System.Windows.Forms.TextBox textBoxBackgroundImagePath;
     }
 }
